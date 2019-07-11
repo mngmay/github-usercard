@@ -71,23 +71,19 @@ const cards = document.querySelector(".cards");
 
 //https://api.github.com/users/mngmay
 
-const follower = followersArray.forEach(user => {
-  console.log(user);
-  console.log(`https://api.github.com/users/${user}`);
-  return `https://api.github.com/users/${user}`;
-});
-
-axios
-  .get(follower)
-  .then(data => {
-    console.log("Get user data check", data.data);
-    const user = data.data;
-    const newUser = createCard(user);
-    cards.appendChild(newUser);
-  })
-  .catch(error => {
-    console.log("ERROR:", error);
-  });
+followersArray.forEach(user =>
+  axios
+    .get(`https://api.github.com/users/${user}`)
+    .then(data => {
+      console.log("Get user data check", data.data);
+      const user = data.data;
+      const newUser = createCard(user);
+      cards.appendChild(newUser);
+    })
+    .catch(error => {
+      console.log("ERROR:", error);
+    })
+);
 
 function createCard(user) {
   //create elements
@@ -119,7 +115,7 @@ function createCard(user) {
   profileLink.href = user.html_url;
   followers.textContent = `Following: ${user.followers}`;
   following.textContent = `Following: ${user.following}`;
-  bio.textContent = user.bio;
+  bio.textContent = `Bio: ${user.bio}`;
 
   //set structure
   card.appendChild(avatar);
