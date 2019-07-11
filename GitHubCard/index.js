@@ -142,6 +142,7 @@ function createCard(user) {
   name.classList.add("name");
   userName.classList.add("username");
   calendar.classList.add("calendar");
+  calendar.classList.add("hide");
   calendarBtn.classList.add("calendarBtn");
 
   //add content
@@ -176,6 +177,15 @@ function createCard(user) {
   cardInfo.appendChild(bio);
   card.appendChild(calendar);
   card.appendChild(calendarBtn);
+
+  //event listeners
+  calendarBtn.addEventListener("click", () => {
+    calendar.classList.toggle("hide");
+
+    !calendar.classList.contains("hide")
+      ? (calendarBtn.textContent = "Collapse")
+      : (calendarBtn.textContent = "Expand");
+  });
 
   return card;
 }
