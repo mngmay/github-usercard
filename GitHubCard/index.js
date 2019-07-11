@@ -134,6 +134,7 @@ function createCard(user) {
   const following = document.createElement("p");
   const bio = document.createElement("p");
   const calendar = document.createElement("img");
+  const calendarBtn = document.createElement("button");
 
   //add classes
   card.classList.add("card");
@@ -141,6 +142,7 @@ function createCard(user) {
   name.classList.add("name");
   userName.classList.add("username");
   calendar.classList.add("calendar");
+  calendarBtn.classList.add("calendarBtn");
 
   //add content
   avatar.src = user.avatar_url;
@@ -160,7 +162,7 @@ function createCard(user) {
   }
 
   calendar.src = `http://ghchart.rshah.org/${user.login}`;
-  console.log(calendar);
+  calendarBtn.textContent = "Expand";
 
   //set structure
   card.appendChild(avatar);
@@ -173,6 +175,7 @@ function createCard(user) {
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
   card.appendChild(calendar);
+  card.appendChild(calendarBtn);
 
   return card;
 }

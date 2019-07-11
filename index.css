@@ -213,3 +213,8 @@ body {
 .card .calendar {
   width: 100%;
 }
+
+.card .calendarBtn {
+  margin: 10px auto 0 auto;
+  border-radius: 10px;
+}
