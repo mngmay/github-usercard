@@ -3,6 +3,9 @@
            https://api.github.com/users/<your name>
 */
 
+//grabbing element to add our cards to
+const cards = document.querySelector(".cards");
+
 axios
   .get("https://api.github.com/users/mngmay")
   .then(data => {
@@ -65,11 +68,6 @@ const followersArray = [
 </div>
 
 */
-
-//grabbing element to add our cards to
-const cards = document.querySelector(".cards");
-
-//https://api.github.com/users/mngmay
 
 //MVP
 // followersArray.forEach(user =>
@@ -168,6 +166,7 @@ function createCard(user) {
   //set structure
   card.appendChild(avatar);
   card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
   cardInfo.appendChild(userName);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
