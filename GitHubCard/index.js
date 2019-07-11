@@ -46,6 +46,23 @@ const followersArray = [];
 
 */
 
+//grabbing element to add our cards to
+const cards = document.querySelector(".cards");
+
+//https://api.github.com/users/mngmay
+
+function createCard(user) {
+  const card = document.createElement("div");
+  const avatar = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const userName = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+}
+
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
