@@ -48,19 +48,84 @@ const followersArray = [];
 
 //grabbing element to add our cards to
 const cards = document.querySelector(".cards");
+console.log(cards);
+
+// const names = [
+//   "kevintou",
+//   "tetondan",
+//   "dustinmyers",
+//   "justsml",
+//   "luishrd",
+//   "bigknell"
+// ];
+const name = "mngmay";
 
 //https://api.github.com/users/mngmay
 
+axios
+  .get(`https://api.github.com/users/${name}`)
+  .then(data => {
+    // console.log("Get user data check", data.data);
+    const users = data.data;
+    //   users.forEach(user => {
+    //     const newUser = createCard(user);
+    //     cards.appendChild(newUser);
+    //   });
+  })
+  .catch(error => {
+    console.log("ERROR:", error);
+  });
+
+//manual test
+const may = createCard(name);
+console.log(may);
+cards.appendChild(may);
+
 function createCard(user) {
+  //create elements
   const card = document.createElement("div");
   const avatar = document.createElement("img");
   const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
   const userName = document.createElement("p");
   const location = document.createElement("p");
   const profile = document.createElement("p");
+  const profileLink = document.createElement("a");
   const followers = document.createElement("p");
   const following = document.createElement("p");
   const bio = document.createElement("p");
+
+  //add classes
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  userName.classList.add("username");
+
+  //add content
+  avatar.src = user.avatar_url;
+  name.textContent = user.name;
+  userName.textContent = user.login;
+  location.textContent = user.location;
+  profile.textContent = "Profile:";
+  profileLink.textContent = user.html_url;
+  profileLink.href = user.html_url;
+  followers.textContent = user.followers;
+  following.textContent = user.following;
+  bio.textContent = user.bio;
+
+  console.log(card);
+
+  //set structure
+  card.appendChild(avatar);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+  console.log(cardInfo);
+  console.log(card);
 }
 
 /* List of LS Instructors Github username's: 
