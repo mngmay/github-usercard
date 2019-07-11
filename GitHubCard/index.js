@@ -6,7 +6,7 @@
 axios
   .get("https://api.github.com/users/mngmay")
   .then(data => {
-    console.log("Get user data check", data.data);
+    // console.log("Get user data check", data.data);
     const user = data.data;
     const newUser = createCard(user);
     cards.appendChild(newUser);
@@ -75,7 +75,7 @@ followersArray.forEach(user =>
   axios
     .get(`https://api.github.com/users/${user}`)
     .then(data => {
-      console.log("Get user data check", data.data);
+      // console.log("Get user data check", data.data);
       const user = data.data;
       const newUser = createCard(user);
       cards.appendChild(newUser);
@@ -115,7 +115,12 @@ function createCard(user) {
   profileLink.href = user.html_url;
   followers.textContent = `Following: ${user.followers}`;
   following.textContent = `Following: ${user.following}`;
-  bio.textContent = `Bio: ${user.bio}`;
+
+  if (user.bio === null) {
+    bio.textContent = "Bio: This user has no biography";
+  } else {
+    bio.textContent = `Bio: ${user.bio}`;
+  }
 
   //set structure
   card.appendChild(avatar);
