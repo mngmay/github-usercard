@@ -88,18 +88,31 @@ const cards = document.querySelector(".cards");
 
 //Stretch
 
+//!!! First Request - get desired user's API
 axios
   .get("https://api.github.com/users/mngmay")
   .then(data => {
+    //! Get the user's followers URL
     // console.log("Get user data check", data.data);
     const followers = data.data.followers_url;
     // console.log("Follower URL check", followers);
+
+    //!!! Second Request - get the list of followers - these are NOT complete objects for the function!
     axios.get(followers).then(data => {
-      console.log("Follower objects", data.data);
+      // console.log("Followers List check", data.data);
       const users = data.data;
+      // ! Get the API link for each user
+      // console.log("User URL check", users[0].url);
       users.forEach(user => {
-        const newUser = createCard(user);
-        cards.appendChild(newUser);
+        const url = user.url;
+
+        //!!! Third Request - for each user URL, create new user card
+        axios.get(url).then(data => {
+          // console.log("Follower Object", data.data);
+          const follower = data.data;
+          const newUser = createCard(follower);
+          cards.appendChild(newUser);
+        });
       });
     });
   })
