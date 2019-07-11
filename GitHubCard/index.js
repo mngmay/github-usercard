@@ -71,19 +71,41 @@ const cards = document.querySelector(".cards");
 
 //https://api.github.com/users/mngmay
 
-followersArray.forEach(user =>
-  axios
-    .get(`https://api.github.com/users/${user}`)
-    .then(data => {
-      // console.log("Get user data check", data.data);
-      const user = data.data;
-      const newUser = createCard(user);
-      cards.appendChild(newUser);
-    })
-    .catch(error => {
-      console.log("ERROR:", error);
-    })
-);
+//MVP
+// followersArray.forEach(user =>
+//   axios
+//     .get(`https://api.github.com/users/${user}`)
+//     .then(data => {
+//       // console.log("Get user data check", data.data);
+//       const user = data.data;
+//       const newUser = createCard(user);
+//       cards.appendChild(newUser);
+//     })
+//     .catch(error => {
+//       console.log("ERROR:", error);
+//     })
+// );
+
+//Stretch
+
+axios
+  .get("https://api.github.com/users/mngmay")
+  .then(data => {
+    // console.log("Get user data check", data.data);
+    const followers = data.data.followers_url;
+    // console.log("Follower URL check", followers);
+    axios.get(followers).then(data => {
+      console.log("Follower objects", data.data);
+      const users = data.data;
+      users.forEach(user => {
+        const newUser = createCard(user);
+        cards.appendChild(newUser);
+      });
+    });
+  })
+  .catch(error => {
+    console.log("ERROR:", error);
+  });
 
 function createCard(user) {
   //create elements
