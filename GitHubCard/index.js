@@ -154,11 +154,13 @@ function createCard(user) {
   followers.textContent = `Following: ${user.followers}`;
   following.textContent = `Following: ${user.following}`;
 
-  if (user.bio === null) {
-    bio.textContent = "Bio: This user has no biography";
-  } else {
-    bio.textContent = `Bio: ${user.bio}`;
-  }
+  user.bio === null
+    ? (bio.textContent = "Bio: This user has no biography")
+    : (bio.textContent = `Bio: ${user.bio}`);
+
+  user.name === null
+    ? (name.textContent = user.login)
+    : (name.textConent = user.name);
 
   calendar.src = `http://ghchart.rshah.org/${user.login}`;
   calendarBtn.textContent = "Expand";
